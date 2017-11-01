@@ -20,6 +20,7 @@ class Engine {
             board[i].setEditable(false);
             board[i].setHorizontalAlignment((JTextField.CENTER));
             board[i].setFont(new Font("Monospaced", Font.BOLD, 20));
+            board[i].getHighlighter().removeAllHighlights();
 
             if(i == 0) {
                 board[i].setText("");
@@ -106,7 +107,7 @@ class Engine {
         if(ifWon())
             label.setText("Grattis, du vann!");
         else
-            label.setText("                 ");
+            label.setText("");
     }
 
     private boolean ifWon() {
