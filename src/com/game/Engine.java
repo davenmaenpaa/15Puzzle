@@ -106,7 +106,7 @@ class Engine {
         if(ifWon())
             label.setText("Grattis, du vann!");
         else
-            label.setText("");
+            label.setText("                 ");
     }
 
     private boolean ifWon() {
@@ -141,7 +141,7 @@ class Engine {
     private boolean tryAbove(int pos) {
         if (pos < 4)
             return false;
-        
+
         if (!board[pos-width].getText().equals(""))
             return false;
         swap(board[pos], board[pos-4]);
