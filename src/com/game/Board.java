@@ -26,7 +26,24 @@ class Board extends JFrame{
         boardPanel.setPreferredSize(new Dimension(450, 450));
         boardPanel.setLayout(new GridLayout(4,4));
 
+        for(JTextField j : engine.getBoard())
+            boardPanel.add(j);
 
+        /* Button */
+        JButton newGameButton = new JButton("Nytt spel");
+        newGameButton.addActionListener(e -> engine.newGame());
+
+        /* Building */
+        add(content);
+        content.add(topPanel);
+        content.add(boardPanel);
+
+        topPanel.add(newGameButton);
+        topPanel.add(Box.createRigidArea(new Dimension(50, 25)));
+        topPanel.add(engine.getLabel());
+
+        engine.newGame();
+        setVisible(true);
     }
 
 }
