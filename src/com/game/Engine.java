@@ -113,9 +113,8 @@ class Engine {
         if(!board[0].getText().equals("1")  || !board[board.length - 1].getText().equals(""))
             return false;
         else {
-            for(int i = 1; i < board.length - 1; i++) {
+            for(int i = 1; i < board.length - 2; i++) {
                 if(intConvert(board[i]) != i+1) {
-                    System.out.println(i);
                     return false;
                 }
             }
