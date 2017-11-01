@@ -139,7 +139,9 @@ class Engine {
     }
 
     private boolean tryAbove(int pos) {
-        if (pos < 4) return false;
+        if (pos < 4)
+            return false;
+        
         if (!board[pos-width].getText().equals(""))
             return false;
         swap(board[pos], board[pos-4]);
