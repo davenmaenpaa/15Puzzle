@@ -19,15 +19,15 @@ class Board extends JFrame{
         content.setLayout(new BoxLayout(content, BoxLayout.PAGE_AXIS));
 
         // Top panel
-        JPanel topPanel = new JPanel();
+        JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         /* Board panel */
         JPanel boardPanel = new JPanel();
         boardPanel.setPreferredSize(new Dimension(450, 450));
         boardPanel.setLayout(new GridLayout(4,4));
 
-        for(JTextField j : engine.getBoard())
-            boardPanel.add(j);
+        for(JTextField tiles : engine.getBoard())
+            boardPanel.add(tiles);
 
         /* Button */
         JButton newGameButton = new JButton("Nytt spel");
