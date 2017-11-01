@@ -66,7 +66,7 @@ class Engine {
                 break;
         }
 
-        if(index > 7 && index < 12 || index >= 0 && index > 4)
+        if(index > 7 && index < 12 || index >= 0 && index < 4)
             return countInversions % 2 != 0;
 
         return countInversions % 2 == 0;
