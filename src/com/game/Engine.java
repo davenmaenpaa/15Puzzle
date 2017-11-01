@@ -59,6 +59,16 @@ class Engine {
                 }
             }
         }
+
+        int index;
+        for(index = 0; index < board.length - 1; index++) {
+            if(board[index].getText().equals(""))
+                break;
+        }
+
+        if(index > 7 && index < 12 || index >= 0 && index > 4)
+            return countInversions % 2 != 0;
+
         return countInversions % 2 == 0;
     }
 
