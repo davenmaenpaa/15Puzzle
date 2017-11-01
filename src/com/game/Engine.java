@@ -52,7 +52,7 @@ class Engine {
     /* http://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html */
     private boolean solvable() {
         int countInversions = 0;
-        for (int i = 0; i < board.length - 2; i++) {
+        for (int i = 0; i < board.length - 1; i++) {
             for (int j = 0; j < i; j++) {
                 if (intConvert(board[j]) > intConvert(board[i])) {
                     countInversions++;
