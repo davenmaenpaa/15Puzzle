@@ -40,7 +40,7 @@ class Board extends JFrame{
 
         topPanel.add(newGameButton);
         topPanel.add(Box.createRigidArea(new Dimension(50, 25)));
-        topPanel.add(engine.getLabel());
+        topPanel.add(engine.getIfWonLabel());
 
         engine.newGame();
         setVisible(true);

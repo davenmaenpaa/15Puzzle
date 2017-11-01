@@ -12,7 +12,7 @@ class Engine {
     private final Color FILLED_TILE = Color.LIGHT_GRAY;
     private final Color EMPTY_TILE = Color.WHITE;
     private int width = 4;
-    private JLabel label;
+    private JLabel ifWonLabel;
 
     Engine() {
         for(int i = 0; i < board.length; i++) {
@@ -39,8 +39,8 @@ class Engine {
             });
         }
 
-        label = new JLabel("");
-        label.setFont(new Font("Arial", Font.BOLD, 15));
+        ifWonLabel = new JLabel("");
+        ifWonLabel.setFont(new Font("Arial", Font.BOLD, 15));
     }
 
     private int intConvert(JTextField tile) {
@@ -52,7 +52,7 @@ class Engine {
     /* http://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html */
     private boolean solvable() {
         int countInversions = 0;
-        for (int i = 0; i < board.length - 1; i++) {
+        for(int i = 0; i < board.length - 2; i++) {
             for (int j = 0; j < i; j++) {
                 if (intConvert(board[j]) > intConvert(board[i])) {
                     countInversions++;
@@ -66,7 +66,7 @@ class Engine {
                 break;
         }
 
-        if(index > 7 && index < 12 || index >= 0 && index < 4)
+        if(index > 7 && index < 12 || index >= 0 && index > 4)
             return countInversions % 2 != 0;
 
         return countInversions % 2 == 0;
@@ -83,7 +83,7 @@ class Engine {
     /* Durstenfeld shuffle */
     private void shuffle() {
         Random rnd = ThreadLocalRandom.current();
-        for (int i = board.length - 1; i > 0; i--) {
+        for(int i = board.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
             swap(board[i], board[index]);
         }
@@ -115,9 +115,9 @@ class Engine {
         }
 
         if(ifWon())
-            label.setText("Grattis, du vann!");
+            ifWonLabel.setText("Grattis, du vann!");
         else
-            label.setText("");
+            ifWonLabel.setText("");
     }
 
     private boolean ifWon() {
@@ -143,54 +143,56 @@ class Engine {
                 break;
         }
 
-        if (tryAbove(pos)) return;
-        if (tryBelow(pos)) return;
-        if (tryLeft(pos)) return;
+        if(tryAbove(pos)) return;
+        if(tryBelow(pos)) return;
+        if(tryLeft(pos)) return;
         tryRight(pos);
     }
 
     private boolean tryAbove(int pos) {
-        if (pos < 4)
+        if(pos < 4)
             return false;
 
-        if (!board[pos-width].getText().equals(""))
+        if(!board[pos-width].getText().equals(""))
             return false;
+
         swap(board[pos], board[pos-4]);
         return true;
     }
 
     private boolean tryBelow(int pos) {
         int height = 4;
-        if (pos > width*(height -1)-1)
+        if(pos > width*(height -1)-1)
             return false;
 
-        if (!board[pos+width].getText().equals(""))
+        if(!board[pos+width].getText().equals(""))
             return false;
+
         swap(board[pos], board[pos+4]);
         return true;
     }
 
     private boolean tryLeft(int pos) {
-        if (pos % width == 0)
+        if(pos % width == 0)
             return false;
 
-        if (!board[pos-1].getText().equals(""))
+        if(!board[pos-1].getText().equals(""))
             return false;
+
         swap(board[pos], board[pos-1]);
         return true;
     }
 
     private void tryRight(int pos) {
-        if (pos % width == width-1)
+        if(pos % width == width-1)
             return;
 
-        if (!board[pos+1].getText().equals(""))
-            return;
-        swap(board[pos], board[pos+1]);
+        if(board[pos+1].getText().equals(""))
+            swap(board[pos], board[pos+1]);
     }
 
-    JLabel getLabel() {
-        return label;
+    JLabel getIfWonLabel() {
+        return ifWonLabel;
     }
 
     JTextField[] getBoard() {
