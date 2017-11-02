@@ -13,8 +13,16 @@ class Engine {
     private final Color EMPTY_TILE = Color.WHITE;
     private int width = 4;
     private JLabel ifWonLabel;
+    private JLabel cheatButton;
 
     Engine() {
+        firstBoard();
+
+        ifWonLabel = new JLabel("");
+        ifWonLabel.setFont(new Font("Arial", Font.BOLD, 15));
+    }
+
+    private void firstBoard() {
         for(int i = 0; i < board.length; i++) {
             board[i] = new JTextField();
             board[i].setEditable(false);
@@ -38,9 +46,6 @@ class Engine {
                 }
             });
         }
-
-        ifWonLabel = new JLabel("");
-        ifWonLabel.setFont(new Font("Arial", Font.BOLD, 15));
     }
 
     private int intConvert(JTextField tile) {
@@ -114,10 +119,7 @@ class Engine {
             second.setText(temp);
         }
 
-        if(ifWon())
-            ifWonLabel.setText("Grattis, du vann!");
-        else
-            ifWonLabel.setText("");
+        ifWon();
     }
 
     private boolean ifWon() {
@@ -126,10 +128,13 @@ class Engine {
         else {
             for(int i = 1; i < board.length - 2; i++) {
                 if(intConvert(board[i]) != i+1) {
+                    ifWonLabel.setText("");
                     return false;
                 }
             }
         }
+
+        ifWonLabel.setText("Grattis, du vann!");
         return true;
     }
 
